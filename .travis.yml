@@ -1,14 +1,14 @@
-language: node_js
-node_js:
-- node
 osx_image: xcode8.2
 before_script:
-- npm run lint
+  - brew update
+  - brew install node
+script:
+  - npm run lint
 branches:
   only:
   - master
 before_deploy:
-- npm run dist
+  - npm run dist
 deploy:
   provider: releases
   skip_cleanup: true
