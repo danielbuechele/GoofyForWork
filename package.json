@@ -1,0 +1,37 @@
+{
+  "name": "gooft-for-work",
+  "version": "1.0.0",
+  "description": "A desktop chat client for Workplace by Facebook",
+  "main": "app/src/main.js",
+  "scripts": {
+    "start": "electron .",
+    "lint": "eslint ./app",
+    "postinstall": "install-app-deps",
+    "start": "electron ./app --enable-logging",
+    "dev": "NODE_ENV='development' npm run start",
+    "dist": "build -mwl --x64 --ia32"
+  },
+  "repository": "https://github.com/electron/electron-quick-start",
+  "keywords": [
+    "Facebook",
+    "Workplace",
+    "chat",
+    "messenger",
+    "goofy"
+  ],
+  "author": "Daniel Büchele",
+  "license": "MIT",
+  "devDependencies": {
+    "@sep/eslint-config-sep": "^1.0.14",
+    "electron": "^1.4.1",
+    "electron-builder": "^10.8.0"
+  },
+  "build": {
+    "productName": "Goofy for Work",
+    "icon": "./icon/AppIcon.icns",
+    "appId": "com.goofyapp.work",
+    "win": {
+      "iconUrl": "https://"
+    }
+  }
+}
