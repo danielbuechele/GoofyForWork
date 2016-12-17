@@ -1,6 +1,7 @@
 language: node_js
 node_js:
 - node
+osx_image: xcode8.2
 before_script:
 - npm run lint
 branches:
