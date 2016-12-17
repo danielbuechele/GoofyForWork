@@ -1,8 +1,10 @@
-language: objective-c
+os:
+  - osx
 osx_image: xcode8.2
 before_script:
   - brew update
   - brew install node
+  - npm install
 script:
   - npm run lint
 branches:
