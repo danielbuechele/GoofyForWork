@@ -1,8 +1,19 @@
 language: node_js
 node_js:
-  - "node"
+- node
 before_script:
-  - npm run lint
+- npm run lint
 branches:
   only:
   - master
+before_deploy:
+- npm run dist
+deploy:
+  provider: releases
+  skip_cleanup: true
+  api_key:
+    secure: X7FkosH+2PdPYAFqUjmo1Useyt5w456GJwlBnmgYUn3OPfwHg8B+e/pzZG5LpcF5BKCGY1YL5xGqA5L1nMY3DHIW3rFjWNG0E1FX5tUDW0GGAafhCyQ+NjKgSFCbPYL8ZBspI9lGBkWBgTjPBGWfVh76VDwuK8Dc0JdhnG8rB6GHczeV570YFI/47EQ+lFy/9O68uz3LNAuBKyUdkMBupdeNnnhVZ1wCn17Tov0hZReI8RJq3kaoiiBa8vPcpoLH5jwEhZocLwPSPiyA5rd6f9ssVu++qfmcHu36nC5pUj+rpfu6FqCP5HXy3+5d5wDqO/KdVbuftKEpesutIME2HrNpbKWXC9bzF/7ckEt+VeZaqzME4vBFu7HBu12u9qDhGc9S/MQO8sZGr07KYOkOEdHpNahHnQpK0TSLZkAiAzOw27nAQP1PWnlCBE8xRwtgf9MdV6QbbEynMUD349AKe/xMtKzQWTpaPZUAWZBweykmjutvp7TuRRgYHFBly4ZNdm3q3clqWwZDahFN6hxlg8rHxJ291lvc7mpANn/nlQmDiVWnyXTowGqp6KYMqnkthKxZyy+aVhbj8o1xwQgH7pGNp1uxCWdx/ac1I4AGSCjqApTFLxMRkUsKA6IA8Ho8LEc8cfIYahySXyNVbA1UOnRGKXSj0nwQaKxo0bl+ln8=
+  file:
+    - "dist/mac/Goofy for Work-1.0.0-mac.zip"
+  on:
+    repo: danielbuechele/GoofyForWork
