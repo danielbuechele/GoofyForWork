@@ -9,7 +9,7 @@
     "postinstall": "install-app-deps",
     "start": "electron ./app --enable-logging",
     "dev": "NODE_ENV='development' npm run start",
-    "dist": "build -mwl --x64 --ia32"
+    "dist": "build -m --x64"
   },
   "repository": "https://github.com/electron/electron-quick-start",
   "keywords": [
