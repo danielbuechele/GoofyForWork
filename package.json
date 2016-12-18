@@ -9,9 +9,9 @@
     "postinstall": "install-app-deps",
     "start": "electron ./app --enable-logging",
     "dev": "NODE_ENV='development' npm run start",
-    "dist": "build -m --x64"
+    "dist": "build -wm --x64"
   },
-  "repository": "https://github.com/electron/electron-quick-start",
+  "repository": "https://github.com/danielbuechele/GoofyForWork",
   "keywords": [
     "Facebook",
     "Workplace",
@@ -28,10 +28,15 @@
   },
   "build": {
     "productName": "Goofy for Work",
-    "icon": "./icon/AppIcon.icns",
+    "icon": "./icon/AppIcon",
     "appId": "com.goofyapp.work",
     "win": {
+      "target": ["zip"],
       "iconUrl": "https://"
-    }
+    },
+    "mac": {
+      "target": ["zip"]
+    },
+    "publish": ["github"]
   }
 }
