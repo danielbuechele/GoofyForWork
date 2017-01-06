@@ -5,7 +5,7 @@
   "main": "app/src/main.js",
   "scripts": {
     "lint": "eslint ./app",
-    "postinstall": "cd app && npm install",
+    "postinstall": "install-app-deps",
     "start": "node ./env.js && electron ./app --enable-logging",
     "dev": "NODE_ENV='development' npm run start",
     "dist": "node ./env.js && build -m --x64",
@@ -21,7 +21,7 @@
   ],
   "author": "Daniel Büchele",
   "license": "MIT",
-  "devDependencies": {
+  "dependencies": {
     "@sep/eslint-config-sep": "^1.0.14",
     "electron": "^1.4.1",
     "electron-builder": "^10.8.0"
