@@ -1,7 +1,8 @@
-const workplaceColor = '#373E4B';
-const lightContrast = '#F6F7F9';
+:root {
+	--workplaceColor: #373E4B;
+	--lightContrast: #F6F7F9;
+}
 
-module.exports = `
 body, #contentCol, ._5i94 ._2s1y {
 	background: white !important;
 	font: menu !important;
@@ -43,6 +44,18 @@ body, #contentCol, ._5i94 ._2s1y {
 }
 
 /* navigation */
+._50ti {
+	position: static !important;
+}
+._2t-f._5flk {
+	position: absolute;
+	right: 0;
+	top: 0;
+	z-index: 600;
+}
+._21dp {
+	position: static !important;
+}
 ._18hn {
 	display: none !important;
 }
@@ -100,6 +113,12 @@ ul._281 {
 .uiScrollableArea.contentBefore:before {
 	display: none !important;
 }
+._2nd.rfloat._ohf {
+	display: none;
+}
+._1r- {
+	display: none;
+}
 
 /* sidebar */
 .MercuryThreadImage {
@@ -112,10 +131,10 @@ ul._281 {
 	max-width: 360px;
 }
 ._kx {
-	background-color: ${lightContrast} !important;
+	background-color: var(--lightContrast) !important;
 }
 ._kv {
-	background-color: ${workplaceColor} !important;
+	background-color: var(--workplaceColor) !important;
 	border-color: transparent !important;
 }
 
@@ -136,12 +155,18 @@ ul._281 {
 	border: 0 !important;
 }
 .uiButtonConfirm input {
-	color: ${workplaceColor} !important;
+	color: var(--workplaceColor) !important;
+}
+._1rs .emoticonsPanel ._5r8f .panelFlyoutArrow {
+	display: none;
+}
+.emoticonsPanel div._5r8f.panelFlyout {
+	left: -260px !important;
 }
 /* search box */
 ._3b ._3c {
 	border: 0 !important;
-	background-color: ${lightContrast};
+	background-color: var(--lightContrast);
 	border-radius: 5px;
 	padding: 6px;
 	width: calc(100% - 10px) !important;
@@ -166,7 +191,5 @@ img._50dv.img {
 	text-decoration: none;
 }
 .webMessengerMessageGroup ._36 a {
-	color: ${workplaceColor} !important;
+	color: var(--workplaceColor) !important;
 }
-
-`;

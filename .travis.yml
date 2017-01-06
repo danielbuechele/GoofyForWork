@@ -2,8 +2,6 @@ os:
   - osx
 osx_image: xcode8
 before_script:
-  - brew install wine --without-x11
-  - brew install mono
   - npm install
 script:
   - npm run lint

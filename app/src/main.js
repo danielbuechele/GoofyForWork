@@ -1,18 +1,22 @@
 const electron = require('electron');
 const BrowserWindow = electron.BrowserWindow;
+const autoUpdater = electron.autoUpdater;
 const path = require('path');
 const url = require('url');
 const app = electron.app;
+const env = require('./config/env.js');
+const os = require('os');
+
+app.setName('Goofy for Work');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
 
 function createWindow () {
+
 	// Create the browser window.
 	mainWindow = new BrowserWindow({width: 800, height: 600, titleBarStyle: 'hidden-inset'});
-
-	mainWindow.setMenu(null);
 
 	// and load the index.html of the app.
 	mainWindow.loadURL(url.format({
@@ -54,3 +58,10 @@ app.on('activate', function () {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
+
+if (env.name === 'production') {
+	const version = app.getVersion();
+	const platform = os.platform() === 'darwin' ? 'osx' : os.platform();
+	autoUpdater.setFeedURL(`https://goofy-nuts.herokuapp.com/update/${platform}/${version}`);
+	autoUpdater.checkForUpdates();
+}

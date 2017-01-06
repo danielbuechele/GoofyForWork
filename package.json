@@ -4,12 +4,12 @@
   "description": "A desktop chat client for Workplace by Facebook",
   "main": "app/src/main.js",
   "scripts": {
-    "start": "electron .",
     "lint": "eslint ./app",
     "postinstall": "install-app-deps",
-    "start": "electron ./app --enable-logging",
+    "start": "node ./env.js && electron ./app --enable-logging",
     "dev": "NODE_ENV='development' npm run start",
-    "dist": "build -wm --x64"
+    "dist": "node ./env.js && build -m --x64",
+    "release": "npm run dist"
   },
   "repository": "https://github.com/danielbuechele/GoofyForWork",
   "keywords": [
