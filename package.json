@@ -8,7 +8,8 @@
     "postinstall": "install-app-deps",
     "start": "node ./env.js && electron ./app --enable-logging",
     "dev": "NODE_ENV='development' npm run start",
-    "dist": "node ./env.js && build -m --x64",
+    "mac": "node ./env.js && build -m --x64",
+    "win": "node ./env.js && build -w --x64",
     "release": "npm run dist"
   },
   "repository": "https://github.com/danielbuechele/GoofyForWork",
@@ -21,7 +22,7 @@
   ],
   "author": "Daniel Büchele",
   "license": "MIT",
-  "dependencies": {
+  "devDependencies": {
     "@sep/eslint-config-sep": "^1.0.14",
     "electron": "^1.4.1",
     "electron-builder": "^10.8.0"

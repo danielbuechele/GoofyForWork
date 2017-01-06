@@ -2,10 +2,10 @@ os:
   - osx
 osx_image: xcode8
 before_script:
-  - npm install
+  - npm install --only=dev
 script:
   - npm run lint
-  - npm run dist
+  - npm run mac
 branches:
   only:
   - master
