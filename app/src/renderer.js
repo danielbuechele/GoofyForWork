@@ -1,6 +1,6 @@
 const { BrowserWindow, app } = require('electron').remote;
 const remote = require('electron').remote;
-const { Menu, autoUpdater } = remote;
+const { Menu, autoUpdater, dialog } = remote;
 const config = require('./config');
 const defaultMenu = require('electron-default-menu');
 const fs = require('fs');
@@ -57,13 +57,13 @@ onload = () => {
 				},
 			}
 		);
-		document.getElementById('webview').setAttribute('src',`https://${domain}.facebook.com/messages`);
+		document.getElementById('webview').setAttribute('src', config.fbDomain(domain));
 	} else {
 		setup.className = 'active';
 		setup.onsubmit = () => {
 			let domain = setup.querySelector('input').value.trim();
 			localStorage.setItem('domain', domain);
-			document.getElementById('webview').setAttribute('src',`https://${domain}.facebook.com/messages`);
+			document.getElementById('webview').setAttribute('src', config.fbDomain(domain));
 		};
 	}
 
@@ -71,6 +71,14 @@ onload = () => {
 		menu[0].submenu.splice(1, 0, {
 			label: 'Check for Update',
 			click() {
+				autoUpdater.on('update-not-available', () => {
+					autoUpdater.removeAllListeners('update-not-available');
+					dialog.showMessageBox({
+						message: 'No update available',
+						detail: `Goofy for Work ${app.getVersion()} is the latest version available.`,
+						buttons: ['OK'],
+					});
+				});
 				autoUpdater.checkForUpdates();
 			},
 		});
@@ -115,7 +123,7 @@ onload = () => {
 			loginWindow.webContents.on('will-navigate', (e, url) => {
 				if (messagesURL.test(url)) {
 					loginWindow.close();
-					webview.loadURL(`https://${domain}.facebook.com/messages`);
+					webview.loadURL(config.fbDomain(domain));
 				}
 			});
 			webview.webContents.openDevTools();

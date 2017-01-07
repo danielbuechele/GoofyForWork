@@ -5,4 +5,6 @@ module.exports = {
 		NEXT_CONVERSATION: 'next-conversation',
 		PREV_CONVERSATION: 'prev-conversation',
 	},
+	fbDomain: domain => `https://${domain}.facebook.com/messages`,
+	updateURL: (platform, version) => `https://goofy-nuts.herokuapp.com/update/${platform}/${version}`,
 };

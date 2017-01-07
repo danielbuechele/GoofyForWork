@@ -68,7 +68,11 @@ document.addEventListener('DOMContentLoaded', () => {
 		// open links in new window
 		document.querySelectorAll('a[href^="http"], a[href^="/"]').forEach(n => {
 			n.onclick = (e) => {
-				let href = e.target.getAttribute('href');
+				let { target } = e;
+				while (target && target.tagName !== 'A') {
+					target = target.parentElement;
+				}
+				let href = target.getAttribute('href');
 				if (href && href.startsWith(`${location.origin}/messages`)) {
 					return;
 				}

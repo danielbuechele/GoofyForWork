@@ -1,7 +1,7 @@
 {
-  "name": "gooft-for-work",
+  "name": "gooft-for-work-builder",
   "version": "1.0.0",
-  "description": "A desktop chat client for Workplace by Facebook",
+  "description": "The electron-builder script to build Goofy for Work",
   "main": "app/src/main.js",
   "scripts": {
     "lint": "eslint ./app",

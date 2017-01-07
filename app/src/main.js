@@ -1,8 +1,10 @@
 const electron = require('electron');
 const BrowserWindow = electron.BrowserWindow;
 const autoUpdater = electron.autoUpdater;
+const dialog = electron.dialog;
 const path = require('path');
 const url = require('url');
+const config = require('./config');
 const app = electron.app;
 const env = require('./config/env.js');
 const os = require('os');
@@ -56,12 +58,21 @@ app.on('activate', function () {
 	}
 });
 
+autoUpdater.on('update-downloaded', (event, releaseNotes, releaseName) => {
+	dialog.showMessageBox({
+		title: 'Update available',
+		message: 'A new version of Goofy for Work is available!',
+		detail: `Goofy for Work ${releaseName} is now available—you have ${app.getVersion()}.`,
+		buttons: ['Install and Restart'],
+	}, autoUpdater.quitAndInstall);
+});
+
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
 
 if (env.name === 'production') {
 	const version = app.getVersion();
 	const platform = os.platform() === 'darwin' ? 'osx' : os.platform();
-	autoUpdater.setFeedURL(`https://goofy-nuts.herokuapp.com/update/${platform}/${version}`);
+	autoUpdater.setFeedURL(config.updateURL(platform, version));
 	autoUpdater.checkForUpdates();
 }
