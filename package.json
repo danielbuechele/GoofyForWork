@@ -30,7 +30,7 @@
     "icon": "./icon/AppIcon",
     "appId": "com.goofyapp.work",
     "win": {
-      "target": ["zip"],
+      "target": ["nsis"],
       "iconUrl": "https://"
     },
     "mac": {
