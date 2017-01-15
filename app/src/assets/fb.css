@@ -1,199 +1,79 @@
 :root {
-	--workplaceColor: #373E4B;
-	--lightContrast: #F6F7F9;
+	--nav-bar-height: 40px;
+	--nav-bar-padding: 3px;
 }
 
-body, #contentCol, ._5i94 ._2s1y {
-	background: white !important;
-	font: menu !important;
+body {
+	overflow: hidden !important;
 }
-#pagelet_sidebar, #rightCol, #pagelet_dock {
+
+/* Workplace toolbar */
+#pagelet_bluebar {
+	display: none;
+}
+
+/* "Get App"-banner */
+._s15 {
 	display: none !important;
 }
-#pagelet_bluebar * {
-	-webkit-app-region: drag;
-}
-#globalContainer {
-	width: 100% !important;
-	padding: 0 !important;
-}
-#contentArea {
-	width: 100% !important;
-	margin-top: -42px;
-	z-index: 302;
-	position: relative;
+
+/* container */
+._4sp8._li {
+	width: 100vw;
 }
 
-._ksg {
-	display: flex;
-	border: 0 !important;
-	background: none !important;
-}
-[role="main"] {
-	flex: 1;
-}
-._2nj .uiScrollableArea {
-	width: 100% !important;
-}
-.uiScrollableArea {
-	width: 100% !important;
-}
+/* left column */
+._1enh {
 
-.uiScrollableAreaBody {
-	width: 100% !important;
 }
+	/* left column navbar */
+	._1enh ._36ic {
+		height: var(--nav-bar-height);
+		padding: var(--nav-bar-padding);
+		display: flex;
+		justify-content: flex-end;
+	}
 
-/* navigation */
-._50ti {
-	position: static !important;
-}
-._2t-f._5flk {
-	position: absolute;
-	right: 0;
-	top: 0;
-	z-index: 600;
-}
-._21dp {
-	position: static !important;
-}
-._18hn {
-	display: none !important;
-}
-._2t-e {
-	visibility: hidden;
-}
-._2t-a {
-	max-width: none !important;
-	padding-right: 0 !important;
-}
-._2s1y {
-	height: 38px !important;
-}
-._1uh- {
-	margin-right: 5px;
-	margin-top: -2px;
-}
-._1uh- ._4kny {
-	display: none;
-}
-._1uh- ._4kny:last-child {
-	display: block;
-}
-._r6 {
-	padding: 0px 20px !important;
-	height: 37px !important;
-}
-ul._281 {
-	height: 37px !important;
-	visibility: hidden;
-}
-._3db {
-	border: 0 !important;
-}
-._-kb a:hover {
-	text-decoration: none;
-}
-._2nd {
-	padding: 0 !important;
-	padding-right: 45px !important;
-	padding-top: 6px !important;
-}
-._2t-8 {
-	height: 42px !important;
-}
-._57j0 {
-	padding-top: 6px;
-}
-.wmMasterView:after {
-	height: 38px !important;
-	top: -12px !important;
-	background-color: #e6e6e6 !important;
-	left: auto !important;
-}
-.uiScrollableArea.contentBefore:before {
-	display: none !important;
-}
-._2nd.rfloat._ohf {
-	display: none;
-}
-._1r- {
-	display: none;
-}
+		/* preferences icon */
+		._1enh ._36ic ._4kzu {
+			display: none;
+		}
 
-/* sidebar */
-.MercuryThreadImage {
-	border-radius: 999em;
-	overflow: hidden;
-}
-.wmMasterView {
-	width: 30% !important;
-	min-width: 260px;
-	max-width: 360px;
-}
-._kx {
-	background-color: var(--lightContrast) !important;
-}
-._kv {
-	background-color: var(--workplaceColor) !important;
-	border-color: transparent !important;
-}
+		/* "Work Chat" title */
+		._1enh ._36ic ._1tqi {
+			display: none;
+		}
 
-/* message box */
-._1rs {
-	padding: 0 !important;
-	border-color: #E0E0E0 !important;
-}
-._2pt {
-	margin: 0 !important;
-	border: 0 !important;
-}
-._1rw {
-	border: 0 !important;
-}
-.uiButtonConfirm {
-	background-color: transparent !important;
-	border: 0 !important;
-}
-.uiButtonConfirm input {
-	color: var(--workplaceColor) !important;
-}
-._1rs .emoticonsPanel ._5r8f .panelFlyoutArrow {
-	display: none;
-}
-.emoticonsPanel div._5r8f.panelFlyout {
-	left: -260px !important;
-}
-/* search box */
-._3b ._3c {
-	border: 0 !important;
-	background-color: var(--lightContrast);
-	border-radius: 5px;
-	padding: 6px;
-	width: calc(100% - 10px) !important;
-}
-.uiSearchInput span {
-	border: 0 !important;
-}
-.uiSearchInput input {
-	padding: 1px 5px 0 0 !important;
-	font: menu !important;
-}
+		/* New message button */
+		@media (max-width: 700px) {
+			._1enh ._36ic ._30yy._2oc8 {
+				position: relative;
+				left: 44px;
+			}
+		}
+		@media (max-width: 500px) {
+			._1enh ._36ic ._30yy._2oc8 {
+				display: none;
+			}
+		}
 
-._3b ._3c button {
-	display: none;
-}
 
-._3b ._48 {
-	margin-left: -18px !important;
-}
+/* right column */
+._1q5- {
 
-/* messages */
-img._50dv.img {
-	border-radius: 999em;
 }
-.webMessengerMessageGroup ._36 a:hover {
-	text-decoration: none;
-}
-.webMessengerMessageGroup ._36 a {
-	color: var(--workplaceColor) !important;
-}
+	/* right column navbar */
+	._1q5- ._5742 {
+		height: var(--nav-bar-height);
+		padding: var(--nav-bar-padding);
+	}
+
+		/* conversation action icons (call, info, ...) */
+		._1q5- ._5742 ._fl2 {
+			padding: 4px 8px;
+		}
+
+			/* Call, video call button */
+			._1q5- ._5742 ._fl2 ._30yy:not([data-testid="info_panel_button"]) {
+				display: none;
+			}

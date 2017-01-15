@@ -6,7 +6,6 @@ const defaultMenu = require('electron-default-menu');
 const fs = require('fs');
 const css = fs.readFileSync(__dirname + '/assets/fb.css', 'utf-8');
 const env = require('./config/env.js');
-const messagesURL = /\.facebook.com\/messages/;
 let loginWindow;
 
 onload = () => {
@@ -52,8 +51,16 @@ onload = () => {
 			{
 				label: `Logout from "${domain}"`,
 				click() {
+					const c = webview.getWebContents().session.cookies;
+					c.get({}, (error, cookies) => {
+						for (var i = cookies.length - 1; i >= 0; i--) {
+							const { name, domain, path, secure } = cookies[i];
+							const url = 'http' + (secure ? 's' : '') + '://' + domain + path;
+							c.remove(url, name, () => {});
+						}
+					});
 					localStorage.removeItem('domain');
-					app.exit();
+					app.relaunch();
 				},
 			}
 		);
@@ -87,7 +94,7 @@ onload = () => {
 	Menu.setApplicationMenu(Menu.buildFromTemplate(menu));
 
 	webview.addEventListener('did-stop-loading', () => {
-		if (messagesURL.test(webview.getURL())) {
+		if (webview.getURL().startsWith(config.fbDomain())) {
 			webview.className = '';
 		}
 	});
@@ -106,7 +113,7 @@ onload = () => {
 	});
 
 	webview.addEventListener('did-get-redirect-request', ({ oldURL, newURL }) => {
-		if (messagesURL.test(oldURL) && /\.facebook\.com\/work\/login/.test(newURL)) {
+		if (oldURL.startsWith(config.fbDomain()) && /\.facebook\.com\/work\/login/.test(newURL)) {
 			loginWindow = new BrowserWindow({
 				parent: remote.getCurrentWindow(),
 				show: false,
@@ -121,14 +128,14 @@ onload = () => {
 				loginWindow.show();
 			});
 			loginWindow.webContents.on('will-navigate', (e, url) => {
-				if (messagesURL.test(url)) {
+				if (url.startsWith(config.fbDomain())) {
 					loginWindow.close();
 					webview.loadURL(config.fbDomain(domain));
 				}
 			});
 			webview.webContents.openDevTools();
 
-		} else if (messagesURL.test(newURL) && loginWindow) {
+		} else if (newURL.startsWith(config.fbDomain()) && loginWindow) {
 			loginWindow.close();
 		}
 	});
