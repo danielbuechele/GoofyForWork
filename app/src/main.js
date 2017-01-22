@@ -8,8 +8,23 @@ const config = require('./config');
 const app = electron.app;
 const env = require('./config/env.js');
 const os = require('os');
+const menubar = require('menubar');
 
 app.setName('Goofy for Work');
+global.sharedObject = {
+	unread: 0,
+	mb: menubar({
+		index: 'file:///' + path.join(__dirname, 'menu.html'),
+		icon: config.getMenuBarIconPath(),
+		width: 300,
+		preloadWindow: true,
+		transparent: true,
+		showDockIcon: true,
+	}),
+};
+
+global.sharedObject.mb.on('show', () => { global.sharedObject.mb.tray.setImage(config.getMenuBarIconPath(true, global.sharedObject.unread)); });
+global.sharedObject.mb.on('hide', () => { global.sharedObject.mb.tray.setImage(config.getMenuBarIconPath(false, global.sharedObject.unread)); });
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.

@@ -62,6 +62,11 @@ body {
 ._1q5- {
 
 }
+	/* right column navbar: new conversation */
+	._2y8y {
+		min-height: var(--nav-bar-height) !important;
+		padding: 8px !important;
+	}
 	/* right column navbar */
 	._1q5- ._5742 {
 		height: var(--nav-bar-height);

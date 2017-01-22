@@ -107,7 +107,7 @@ onload = () => {
 	});
 
 	webview.addEventListener('ipc-message', (e) => {
-		if (e.channel === 'dock-count') {
+		if (e.channel === config.channels.DOCK_COUNT) {
 			app.setBadgeCount(e.args[0]);
 		}
 	});
@@ -133,7 +133,6 @@ onload = () => {
 					webview.loadURL(config.fbDomain(domain));
 				}
 			});
-			webview.webContents.openDevTools();
 
 		} else if (newURL.startsWith(config.fbDomain()) && loginWindow) {
 			loginWindow.close();
