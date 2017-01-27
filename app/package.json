@@ -1,6 +1,6 @@
 {
   "name": "gooft-for-work",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A desktop chat client for Workplace by Facebook",
   "main": "src/main.js",
   "author": "Daniel Büchele",

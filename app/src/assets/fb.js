@@ -71,7 +71,7 @@ let watchMessageList = () => {
 				const muted = message.classList.contains(MUTED);
 
 				if (!isMessageFromSelf && !muted) {
-					let notification = new Notification(name, { body: messageBody, icon: image, data: id });
+					let notification = new Notification(name, { body: messageBody, icon: image, data: id, silent: true });
 					notification.onclick = e => {
 						document.querySelector(`[id="${e.target.data}"] ${ACTIVATE_CONVERSATION}`).click();
 					};
