@@ -1,6 +1,8 @@
 const electron = require('electron');
 const path = require('path');
 const os = require('os');
+const Config = require('electron-config');
+const userConfig = new Config();
 
 module.exports = {
 	channels: {
@@ -10,7 +12,7 @@ module.exports = {
 		PREV_CONVERSATION: 'prev-conversation',
 		NOTIFICATION_COUNT: 'notification-count',
 	},
-	fbDomain: (domain = localStorage.getItem('domain')) => domain === 'www' ? 'https://www.facebook.com/messages' : `https://${domain}.facebook.com/chat`,
+	fbDomain: (domain = userConfig.get('domain')) => domain === 'www' ? 'https://www.facebook.com/messages' : `https://${domain}.facebook.com/chat`,
 	updateURL: (platform, version) => `https://goofy-nuts.herokuapp.com/update/${platform}/${version}`,
 	getMenuBarIconPath: (focus, unread) => {
 		let mode = 'dark';

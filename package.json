@@ -1,6 +1,6 @@
 {
   "name": "gooft-for-work-builder",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "The electron-builder script to build Goofy for Work",
   "main": "app/src/main.js",
   "scripts": {

@@ -9,22 +9,28 @@ const app = electron.app;
 const env = require('./config/env.js');
 const os = require('os');
 const menubar = require('menubar');
+const Config = require('electron-config');
+const userConfig = new Config();
 
 app.setName('Goofy for Work');
-global.sharedObject = {
-	unread: 0,
-	mb: menubar({
-		index: 'file:///' + path.join(__dirname, 'menu.html'),
-		icon: config.getMenuBarIconPath(),
-		width: 300,
-		preloadWindow: true,
-		transparent: true,
-		showDockIcon: true,
-	}),
-};
 
-global.sharedObject.mb.on('show', () => { global.sharedObject.mb.tray.setImage(config.getMenuBarIconPath(true, global.sharedObject.unread)); });
-global.sharedObject.mb.on('hide', () => { global.sharedObject.mb.tray.setImage(config.getMenuBarIconPath(false, global.sharedObject.unread)); });
+const menubarEnabled = userConfig.get('menubar');
+if (menubarEnabled) {
+	global.sharedObject = {
+		unread: 0,
+		mb: menubar({
+			index: 'file:///' + path.join(__dirname, 'menu.html'),
+			icon: config.getMenuBarIconPath(),
+			width: 300,
+			preloadWindow: true,
+			transparent: true,
+			showDockIcon: true,
+		}),
+	};
+
+	global.sharedObject.mb.on('show', () => { global.sharedObject.mb.tray.setImage(config.getMenuBarIconPath(true, global.sharedObject.unread)); });
+	global.sharedObject.mb.on('hide', () => { global.sharedObject.mb.tray.setImage(config.getMenuBarIconPath(false, global.sharedObject.unread)); });
+}
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -50,7 +56,9 @@ function createWindow () {
 		} else {
 			// the user only tried to close the window
 			e.preventDefault();
-			mainWindow.hide();
+			if (mainWindow) {
+				mainWindow.hide();
+			}
 		}
 	});
 }
@@ -87,7 +95,10 @@ autoUpdater.on('update-downloaded', (event, releaseNotes, releaseName) => {
 		message: 'A new version of Goofy for Work is available!',
 		detail: `Goofy for Work ${releaseName} is now available—you have ${app.getVersion()}.`,
 		buttons: ['Install and Restart'],
-	}, autoUpdater.quitAndInstall);
+	}, () => {
+		willQuitApp = true;
+		autoUpdater.quitAndInstall();
+	});
 });
 
 // In this file you can include the rest of your app's specific main process

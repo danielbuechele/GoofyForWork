@@ -5,8 +5,8 @@ const latestMessages = new Map();
 const NEW_MESSAGE_BUTTON = '._1enh ._36ic ._30yy._2oc8';
 const UNREAD_MESSAGE_COUNT = '#mercurymessagesCountValue';
 const MESSAGE_LIST = '._4u-c._9hq ul[role=grid]';
-const MESSAGE_PREVIEW = '._1htf span';
-const MESSAGE_PREVIEW_EM = '_4qba';
+const MESSAGE_PREVIEW = '._1htf';
+const MESSAGE_PREVIEW_EM = '._4qba';
 const MESSAGE_ID = '._5l-3._1ht5';
 const MESSAGE_SENDER = '._1ht6';
 const MESSAGE_SENDER_PICTURE = '._55lt img';
@@ -60,13 +60,14 @@ let watchMessageList = () => {
 		document.querySelector(MESSAGE_LIST).childNodes.forEach(message => {
 			const id = message.querySelector(MESSAGE_ID).getAttribute('id');
 			const messageBody = messageWithEmojis(message.querySelector(MESSAGE_PREVIEW));
+
 			if (latestMessages.get(id) !== messageBody) {
 				const name = message.querySelector(MESSAGE_SENDER).textContent;
 				const image = message.querySelector(MESSAGE_SENDER_PICTURE).getAttribute('src');
 
 				// check if it's a message from myself
-				const parent = message.querySelector(MESSAGE_PREVIEW).parentElement;
-				const isMessageFromSelf = parent.classList.contains(MESSAGE_PREVIEW_EM) && parent.hasAttribute('data-intl-translation') && parent.getAttribute('data-intl-translation') !== '{conversation_snippet}';
+				const preview = message.querySelector(MESSAGE_PREVIEW_EM);
+				const isMessageFromSelf = preview && preview.hasAttribute('data-intl-translation') && preview.getAttribute('data-intl-translation') !== '{conversation_snippet}';
 
 				const muted = message.classList.contains(MUTED);
 
@@ -85,7 +86,7 @@ let watchMessageList = () => {
 
 function messageWithEmojis(node) {
 	let message = '';
-	node.childNodes.forEach(n => {
+	node.querySelector('span').childNodes.forEach(n => {
 		if (n.nodeType === 3) {
 			message += n.textContent;
 		} else if (n.nodeName === 'IMG' && n.classList.contains(EMOJI)) {

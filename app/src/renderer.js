@@ -6,12 +6,14 @@ const defaultMenu = require('electron-default-menu');
 const fs = require('fs');
 const css = fs.readFileSync(__dirname + '/assets/fb.css', 'utf-8');
 const env = require('./config/env.js');
+const Config = require('electron-config');
+const userConfig = new Config();
 let loginWindow;
 
 onload = () => {
 	const webview = document.getElementById('webview');
 	const setup = document.getElementById('setup');
-	let domain = localStorage.getItem('domain');
+	let domain = userConfig.get('domain');
 
 	const menu = defaultMenu(app);
 
@@ -40,6 +42,19 @@ onload = () => {
 			click() {
 				webview.send(config.channels.PREV_CONVERSATION);
 			},
+		},
+		{
+			type: 'separator',
+		},
+		{
+			label: 'Show notifications in menu bar',
+			type: 'checkbox',
+			checked: userConfig.get('menubar'),
+			click() {
+				userConfig.set('menubar', !userConfig.get('menubar'));
+				remote.app.relaunch();
+				remote.app.exit(0);
+			},
 		}
 	);
 
@@ -59,7 +74,7 @@ onload = () => {
 							c.remove(url, name, () => {});
 						}
 					});
-					localStorage.removeItem('domain');
+					userConfig.delete('domain');
 					app.relaunch();
 				},
 			}
@@ -69,7 +84,7 @@ onload = () => {
 		setup.className = 'active';
 		setup.onsubmit = () => {
 			let domain = setup.querySelector('input').value.trim();
-			localStorage.setItem('domain', domain);
+			userConfig.set('domain', domain);
 			document.getElementById('webview').setAttribute('src', config.fbDomain(domain));
 		};
 	}
