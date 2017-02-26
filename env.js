@@ -10,3 +10,7 @@ fs.writeFileSync(
 		updateURL: 'https://goofy-nuts.herokuapp.com/update',
 	})
 );
+
+const appPackage = JSON.parse(fs.readFileSync('app/package.json', 'utf8'));
+appPackage.version = pjson.version;
+fs.writeFileSync('app/package.json', JSON.stringify(appPackage, null, '  '));
