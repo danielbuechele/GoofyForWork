@@ -1,3 +1,8 @@
 var fs = require('fs');
 
-fs.createReadStream(`app/src/config/env_${process.env.NODE_ENV === 'production' ? 'production' : 'development'}.json`).pipe(fs.createWriteStream('app/src/config/env.json'));
+fs.writeFileSync('app/src/config/env.json', JSON.stringify({
+	name: process.env.NODE_ENV || 'development',
+	appName: process.env.APP_NAME || 'Goofy for Work',
+	product: process.env.PRODUCT || 'workplace', // 'workplace' or 'www'
+	updateURL: process.env.UPDATE_URL || 'https://goofy-nuts.herokuapp.com/update',
+}));
